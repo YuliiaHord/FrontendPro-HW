@@ -8,23 +8,47 @@ let operandSecond = 0;
 
 const isTwoOperands = userChoice === "Add" || userChoice === "Diff" || userChoice === "Mult" || userChoice === "Div";
 const isOneOperand = userChoice === "Sin" || userChoice === "Cos" || userChoice === "Sqrt";
+let programRun = true;
 
 if (isTwoOperands) {
      operandFirst = prompt("Enter first number", "0");
-     operandSecond = prompt("Enter second number", "0");
+     if  (operandFirst === null) {
+        alert("Goodbye, see you later");
+        programRun = false;
+    } else if  ((!Number(operandFirst) && Number(operandFirst)!==0) || operandFirst === ""){
+        alert("This is bad digit, goodbye");
+        programRun = false;
+    } else{
+        operandFirst = Number(operandFirst);
+    }
+    if(programRun){
+        operandSecond = prompt("Enter second number", "0");
+        if (operandSecond === null ) {
+            alert("Goodbye, see you later");
+            programRun = false;
+        } else if  ((!Number(operandSecond) && Number(operandSecond)!==0) || operandSecond === ""){
+            alert("This is bad digit, goodbye");
+            programRun = false;
+        } else{
+            operandSecond = Number(operandSecond);
+        }
+    }
 } else if (isOneOperand) {
     operandFirst = prompt("Enter your number");
+    if (operandFirst === null) {
+        alert("Goodbye, see you later");
+        programRun = false;
+    } else if  ((!Number(operandFirst) && Number(operandFirst)!==0) || operandFirst === ""){
+        alert("This is bad digit, goodbye");
+        programRun = false;
+    } else{
+        operandFirst = Number(operandFirst);
+    }
 } else {
     alert("Goodbye, see you later");
 }
 
-if (operandFirst === null || operandSecond === null) {
-    alert("Goodbye, see you later");
-} else if (operandFirst === "" || operandSecond === ""){
-    alert("This is bad digit, goodbye");
-} else if ((!Number(operandFirst) && Number(operandFirst)!==0) || (!Number(operandSecond) && Number(operandSecond)!==0)){
-    alert("This is bad digit, goodbye");
-} else {
+if(programRun){
     if (userChoice === "Add") {
         const sum = Number(operandFirst) + Number(operandSecond);
         alert(`The sum of ${operandFirst} and ${operandSecond} is ${sum}`);
