@@ -1,21 +1,16 @@
 "use strict";
 
 function removeElement(array, item) {
-    for (let i = 0; i < array.length; i++){
-        if(Array.isArray(array[i]) && Array.isArray(item)) {
-            let arrayString = "";
-            arrayString = String(array[i].sort());
-            if(arrayString === String(item.sort())){
-                array.splice(i, 1);
-                i--;
-                continue;
+    return array.filter((element) => {
+        if(Array.isArray(element) && Array.isArray(item)){
+            let arrayString = JSON.stringify(element);
+            if(arrayString === JSON.stringify(item)){
+                return;
             }
         }
-        if(array[i] === item) {
-            array.splice(i, 1);
-            i--;
-        }
-    }
-    return array;
+        return element !== item;
+    });
 }
+
+
 
