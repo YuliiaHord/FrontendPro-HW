@@ -3,6 +3,7 @@
 const table = document.createElement("table");
 document.body.insertAdjacentElement("afterbegin", table);
 table.style.border = "1px solid black";
+table.style.margin = "0 auto";
 
 function createTr() {
     return document.createElement("tr");
@@ -20,6 +21,7 @@ function createTd(data) {
     const td = document.createElement("td");
     td.style.border = "1px solid black";
     td.style.width = "20px";
+    td.style.textAlign = "center";
     td.textContent = data;
     return td;
 }
