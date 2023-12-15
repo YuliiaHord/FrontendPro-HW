@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: #1E1F26;
+    font-family: Arial, serif;
+}
+
+.header {
+    padding-top: 15%;
+}
+
+.header__heading {
+    max-width: 225px;
+    margin: 0 auto;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #d0e1f9;
+    padding-bottom: 5px;
+
+}
+
+.page__message {
+    margin: 0 auto;
+    display: block;
+    padding: 15px 30px;
+    overflow: auto;
+    resize: none;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px 0 rgba(77, 100, 141, 1);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.page__message:focus {
+    box-shadow: 0 4px 14px 0 rgba(208, 225, 249, 0.85);
+    transition: all 1s ease;
+}
+
+.page__form {
+    padding-top: 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 250px;
+    width: 220px;
+    gap: 5px 10px;
+}
+
+.page__form-item {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    flex-basis: 15px;
+    justify-content: start;
+    padding: 0 7px;
+    gap: 5px;
+    color: white;
+}
+
+.page__form-item input {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.page__form-item label {
+    font-size: 12px;
+}
+
+.page__message::placeholder {
+    content: "";
+    font-size: 10px;
+
+}
