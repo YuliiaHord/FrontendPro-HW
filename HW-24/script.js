@@ -15,6 +15,7 @@ class ShopSystem {
     #createList(data, categoryName = null) {
         const list = document.createElement("ul");
         list.classList.add("list-group");
+        const listItemFragment = document.createDocumentFragment();
         for (const key in data) {
             const listItem = document.createElement("li");
             listItem.classList.add("list-group-item");
@@ -26,8 +27,9 @@ class ShopSystem {
                 listItem.setAttribute(`data-category`, categoryName);
                 listItem.setAttribute(`data-goods`, key);
             }
-            list.append(listItem);
+            listItemFragment.append(listItem);
         }
+        list.append(listItemFragment);
         return list;
     }
 
@@ -48,11 +50,13 @@ class ShopSystem {
         h3.classList.add("fs-3");
         this.#infoCol.append(h3);
         const goodsInfo = this.#categories[category].getGoods()[goodsName].getInfo();
+        const textFragment = document.createDocumentFragment();
         for (const key in goodsInfo) {
             const p = document.createElement("p");
             p.textContent = `${key}: ${goodsInfo[key]}`;
-            this.#infoCol.append(p);
+            textFragment.append(p);
         }
+        this.#infoCol.append(textFragment);
         const btn = document.createElement("button");
         btn.setAttribute("type", "submit");
         btn.setAttribute("id", "purchase");

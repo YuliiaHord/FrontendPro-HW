@@ -8,65 +8,68 @@ class ReactionContainer {
         this._reactionsArr = reactionsArr;
     }
 
-    createContainer() {
-        function createForm() {
-            const form = document.createElement("form");
-            form.setAttribute("action", "#");
-            form.className = "page__form";
-            return form;
-        }
-
-        function createItemContainer() {
-            const div = document.createElement("div");
-            div.className = "page__form-item";
-            return div;
-        }
-
-        function createLabel({property = "for", forValue}) {
-            const label = document.createElement("label");
-            label.setAttribute(property, forValue);
-            label.textContent = "0";
-            label.style.opacity = "0";
-
-            document.addEventListener("click", function (event) {
-                if (event.target.tagName === 'LABEL') {
-                    event.preventDefault();
-                } else if (event.target.id === label.getAttribute(property)) {
-                    let counter = parseInt(label.textContent);
-                    label.textContent = String(++counter);
-                    label.style.opacity = "1";
-                    event.target.parentElement.style.background = "#283655";
-                    event.target.parentElement.style.borderRadius = "50px";
-                }
+    #createEl({type, attributes, className, text, styleProperty}) {
+        const el = document.createElement(type);
+        if (attributes) {
+            Object.entries(attributes).forEach(([key, value]) => {
+                el.setAttribute(key, value);
             });
-            return label;
         }
-
-        function createInput({type = "button", value = "", id}) {
-            const input = document.createElement("input");
-            input.setAttribute("type", type);
-            input.setAttribute("value", value);
-            input.setAttribute("id", id);
-            return input;
+        if (className) el.className = className;
+        if (text) el.textContent = text;
+        if (styleProperty) {
+            Object.entries(styleProperty).forEach(([key, value]) => {
+                el.style[key] = value;
+            });
         }
+        return el;
+    }
 
-        const form = createForm();
+    createContainer() {
+
+        const form = this.#createEl({type: "form", attributes: {action: "#"}, className: "page__form"});
         document.querySelector("main").append(form);
+
+        const formItemsFragment = document.createDocumentFragment();
 
         this._reactionsArr.forEach((el, index) => {
             let keys = Object.keys(this._reactionsArr[index]);
             const reactionName = keys[0];
             const reaction = String.fromCodePoint(parseInt(this._reactionsArr[index][keys[0]], 16));
 
-            const div = createItemContainer();
-            form.append(div);
+            const div = this.#createEl({type: "div", className: "page__form-item"});
 
-            const label = createLabel({forValue: reactionName});
+            const label = this.#createEl({
+                type: "label",
+                attributes: {"for": [reactionName]},
+                className: "page__form-item",
+                textContent: "0",
+                styleProperty: {opacity: 0},
+            });
             div.append(label);
 
-            const input = createInput({value: reaction, id: reactionName});
+            document.addEventListener("click", function (event) {
+                if (event.target.tagName === 'LABEL') {
+                    event.preventDefault();
+                } else if (event.target.id === label.getAttribute("for")) {
+                    let counter = Number(label.textContent);
+                    label.textContent = String(++counter);
+                    label.style.opacity = "1";
+                    event.target.parentElement.style.background = "#283655";
+                    event.target.parentElement.style.borderRadius = "50px";
+                }
+            });
+
+            const input = this.#createEl({
+                type: "input",
+                attributes: {type: "button", value: [reaction], id: [reactionName]},
+            });
+
             div.append(input);
+            formItemsFragment.append(div);
         })
+
+        form.append(formItemsFragment);
     }
 
     addNewReactions(data) {
