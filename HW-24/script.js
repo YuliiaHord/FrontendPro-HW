@@ -5,9 +5,9 @@ class ShopSystem {
     #goodsCol;
     #infoCol;
 
-    #createCol() {
+    #createCol(className) {
         const colContainer = document.createElement("div");
-        colContainer.className = "col";
+        colContainer.className = className;
         document.querySelector(".row").append(colContainer);
         return colContainer;
     }
@@ -82,10 +82,10 @@ class ShopSystem {
         this.#mainRow = document.createElement('div');
         this.#mainRow.classList.add("row", "mt-5");
         document.querySelector(".container").append(this.#mainRow);
-        this.#categoryCol = this.#createCol();
+        this.#categoryCol = this.#createCol("col-3");
         this.createCategories();
-        this.#goodsCol = this.#createCol();
-        this.#infoCol = this.#createCol();
+        this.#goodsCol = this.#createCol("col-4");
+        this.#infoCol = this.#createCol("col-4");
         this.#mainRow.addEventListener("click", (event) => {
             if ("goods" in event.target.dataset) {
                 this.createInfo(event.target.dataset["category"], event.target.dataset["goods"]);
