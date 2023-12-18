@@ -8,26 +8,20 @@ class ReactionContainer {
         this._reactionsArr = reactionsArr;
     }
 
-    #createEl({type, attributes, className, text, styleProperty}) {
+    #createEl({type, attributes, text}) {
         const el = document.createElement(type);
         if (attributes) {
             Object.entries(attributes).forEach(([key, value]) => {
                 el.setAttribute(key, value);
             });
         }
-        if (className) el.className = className;
         if (text) el.textContent = text;
-        if (styleProperty) {
-            Object.entries(styleProperty).forEach(([key, value]) => {
-                el.style[key] = value;
-            });
-        }
         return el;
     }
 
     createContainer() {
 
-        const form = this.#createEl({type: "form", attributes: {action: "#"}, className: "page__form"});
+        const form = this.#createEl({type: "form", attributes: {action: "#", class: "page__form"}});
         document.querySelector("main").append(form);
 
         const formItemsFragment = document.createDocumentFragment();
@@ -37,14 +31,12 @@ class ReactionContainer {
             const reactionName = keys[0];
             const reaction = String.fromCodePoint(parseInt(this._reactionsArr[index][keys[0]], 16));
 
-            const div = this.#createEl({type: "div", className: "page__form-item"});
+            const div = this.#createEl({type: "div", attributes: {class: "page__form-item"}});
 
             const label = this.#createEl({
                 type: "label",
-                attributes: {"for": [reactionName]},
-                className: "page__form-item",
+                attributes: {"for": [reactionName], class: "page__form-item", style: "opacity: 0"},
                 textContent: "0",
-                styleProperty: {opacity: 0},
             });
             div.append(label);
 
