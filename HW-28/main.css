@@ -1,0 +1,8 @@
+.custom-input::placeholder {
+    color: white;
+}
+.custom-input:focus{
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+}
