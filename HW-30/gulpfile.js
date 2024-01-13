@@ -24,11 +24,17 @@ function cleanDist() {
 }
 
 function html() {
-    return src(`${APP_PATH}*.html`).pipe(ssi()).pipe(htmlmin({collapseWhitespace: true})).pipe(dest(`${BUILD_PATH}`));
+    return src(`${APP_PATH}*.html`)
+        .pipe(ssi())
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(dest(`${BUILD_PATH}`));
 }
 
 function images() {
-    return src(`${APP_PATH}images/*`).pipe(newer(`${BUILD_PATH}img`)).pipe(imagemin()).pipe(dest(`${BUILD_PATH}img`));
+    return src(`${APP_PATH}images/*`)
+        .pipe(newer(`${BUILD_PATH}img`))
+        .pipe(imagemin())
+        .pipe(dest(`${BUILD_PATH}img`));
 }
 
 function styles() {
